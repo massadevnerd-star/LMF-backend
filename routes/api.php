@@ -59,6 +59,8 @@ Route::prefix('auth')->group(function () {
 
 });
 
+Route::get('/stories/public', [StoryController::class, 'publicIndex']);
+
 Route::middleware('auth:sanctum')->get('/user', [AuthController::class, 'user']);
 
 // Admin Routes

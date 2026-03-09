@@ -164,4 +164,15 @@ class StoryController extends Controller
         return response()->json('test');
     }
 
+    public function publicIndex(Request $request): JsonResponse
+    {
+        // For guest users, return all published stories
+        $stories = Story::where('status', 'published')
+            ->with(['children', 'user']) // Optionally load user/author info
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return response()->json($stories);
+    }
+
 }
