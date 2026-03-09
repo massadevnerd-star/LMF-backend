@@ -1,0 +1,8 @@
+composer require laravel/sanctum
+composer require laravel/socialite
+composer require spatie/laravel-permission
+
+e dopo esegui
+php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
+php artisan vendor:publish --provider="Spatie\Permission\PermissionServiceProvider"
+
