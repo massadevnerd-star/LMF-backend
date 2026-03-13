@@ -28,6 +28,22 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'aws' => [
+        'key' => env('AWS_ACCESS_KEY_ID'),
+        'secret' => env('AWS_SECRET_ACCESS_KEY'),
+        'token' => env('AWS_SESSION_TOKEN'),
+        'region' => env('AWS_DEFAULT_REGION', 'eu-central-1'),
+    ],
+
+    'deepl' => [
+        'api_key' => env('DEEPL_API_KEY'),
+        'api_url' => env('DEEPL_API_URL', 'https://api-free.deepl.com/v2'),
+    ],
+
+    'mascot' => [
+        'mock' => env('MASCOT_MOCK_MODE', false),
+    ],
+
     'google' => [
         'client_id' => env('GOOGLE_CLIENT_ID'),
         'client_secret' => env('GOOGLE_CLIENT_SECRET'),

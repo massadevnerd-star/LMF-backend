@@ -25,6 +25,10 @@ Route::prefix('auth')->group(function () {
     Route::get('/stories', [StoryController::class, 'index'])->middleware('auth:sanctum');
     Route::get('/stories/{id}', [StoryController::class, 'show'])->middleware('auth:sanctum');
     Route::post('/upload', [UploadController::class, 'store'])->middleware('auth:sanctum');
+    
+    // Translation Mascot Route
+    Route::post('/stories/{id}/translate', [\App\Http\Controllers\Api\TranslationController::class, 'translateStory'])->middleware('auth:sanctum');
+
 
     // Email & Password Routes
     Route::post('/forgot-password', [PasswordResetController::class, 'forgot']);
