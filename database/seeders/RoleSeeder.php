@@ -25,21 +25,21 @@ class RoleSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission) {
-            Permission::create(['name' => $permission]);
+            Permission::firstOrCreate(['name' => $permission]);
         }
 
         // Create Roles and Assign Permissions
 
         // 1. Admin: Everything
-        $adminRole = Role::create(['name' => 'admin']);
+        $adminRole = Role::firstOrCreate(['name' => 'admin']);
         $adminRole->givePermissionTo(Permission::all());
 
         // 2. Parent: Can manage their own data and create stories
-        $parentRole = Role::create(['name' => 'parent']);
+        $parentRole = Role::firstOrCreate(['name' => 'parent']);
         $parentRole->givePermissionTo(['create stories', 'read stories']);
 
         // 3. Kid: Can read stories
-        $kidRole = Role::create(['name' => 'kid']);
+        $kidRole = Role::firstOrCreate(['name' => 'kid']);
         $kidRole->givePermissionTo(['read stories']);
 
         // Create Default Admin User

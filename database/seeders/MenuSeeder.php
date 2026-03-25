@@ -13,10 +13,11 @@ class MenuSeeder extends Seeder
      */
     public function run(): void
     {
-        // Ensure roles exist (just in case, though likely seeded elsewhere)
-        // $roleAdult = Role::firstOrCreate(['name' => 'adult']);
+        // Ensure roles exist
+        $roleParent = Role::firstOrCreate(['name' => 'parent']);
+        $roleAdmin = Role::firstOrCreate(['name' => 'admin']);
 
-        // 1. My Castle (Home)
+        // 1. My Castle (Home) - Public
         MenuItem::firstOrCreate(
             ['route' => 'home'],
             [
@@ -26,7 +27,7 @@ class MenuSeeder extends Seeder
             ]
         );
 
-        // 2. Search Stories
+        // 2. Search Stories - Public
         MenuItem::firstOrCreate(
             ['route' => 'search'],
             [
@@ -45,8 +46,8 @@ class MenuSeeder extends Seeder
                 'order' => 3
             ]
         );
-        // Assign role if needed (Assuming many-to-many relationship set up in model)
-        // $ai->roles()->syncWithoutDetaching([$roleAdult->id]);
+        // Assign roles
+        $ai->roles()->syncWithoutDetaching([$roleParent->id, $roleAdmin->id]);
 
         // 4. My Lab (Restricted)
         $lab = MenuItem::firstOrCreate(
@@ -57,7 +58,7 @@ class MenuSeeder extends Seeder
                 'order' => 4
             ]
         );
-        // $lab->roles()->syncWithoutDetaching([$roleAdult->id]);
+        $lab->roles()->syncWithoutDetaching([$roleParent->id, $roleAdmin->id]);
 
         // 5. Magic Shop (Restricted)
         $shop = MenuItem::firstOrCreate(
@@ -68,6 +69,6 @@ class MenuSeeder extends Seeder
                 'order' => 5
             ]
         );
-        // $shop->roles()->syncWithoutDetaching([$roleAdult->id]);
+        $shop->roles()->syncWithoutDetaching([$roleParent->id, $roleAdmin->id]);
     }
 }
