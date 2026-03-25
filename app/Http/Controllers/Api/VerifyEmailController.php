@@ -79,6 +79,12 @@ class VerifyEmailController extends Controller
         // Costruisce la URL personalizzata evitando di usare le default routes di Laravel
         // Che potrebbero fallire se il nome route non è settato correttamente.
         $hash = sha1($user->getEmailForVerification());
+        
+        // Defensive check: user must be persisted to have an ID for URL generation
+        if (!$user->getKey()) {
+            \Illuminate\Support\Facades\Log::warning("Cannot send verification email: user has no ID.", ['user_email' => $user->email]);
+            return;
+        }
 
         // Signed route simulata 
         // In un mondo reale si userebbe URL::temporarySignedRoute() se configurato per API web
